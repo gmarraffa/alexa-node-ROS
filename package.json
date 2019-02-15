@@ -17,5 +17,8 @@
   },
   "devDependencies": {
     "supervisor": "^0.6.0"
+  },
+  "scripts": {
+    "start": "/bin/bash scripts/start.sh"
   }
 }

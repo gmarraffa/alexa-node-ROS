@@ -24,7 +24,7 @@ app.intent("PublishHelloIntent", {
   console.log("publish-example: PublishHelloIntent");
   // Do stuff with ROS using ROSLIB
   // You can see this String message if you are running rostopic echo /alexa_msgs
-  msg_topic.publish("publish-example says hello");
+  msg_topic.publish(getROSString("publish-example says hello"));
   // Send a response back to the Echo for the voice interface
   res.say('Hello human');
 });
@@ -36,7 +36,7 @@ app.intent("PublishGoodbyeIntent", {
   console.log("publish-example: PublishGoodbyeIntent");
   // Do stuff with ROS using ROSLIB
   // You can see this String message if you are running rostopic echo /alexa_msgs
-  msg_topic.publish("publish-example says goodbye");
+  msg_topic.publish(getROSString("publish-example says goodbye"));
   // Send a response back to the Echo for the voice interface
   res.say('Goodbye human');
 });
@@ -96,6 +96,11 @@ var msg_topic = new ROSLIB.Topic({ros: ros, name: '/alexa_msgs', messageType: 's
 // topic name to like cmd_vel2 if you have a robot that you don't want moving
 var cmd_vel_topic = new ROSLIB.Topic({ros: ros, name: '/cmd_vel', messageType: 'geometry_msgs/Twist'});
 
+function getROSString(str){
+  return new ROSLIB.Message({
+    data: str
+  });
+}
 
 // Export the alexa-app we created at the top
 module.exports = app;
